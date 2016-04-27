@@ -2,7 +2,7 @@
   "name": "reduction-sauce",
   "version": "0.0.1",
   "description": "Simple key value reducers without boilerplate",
-  "main": "dist/reduction-sauce.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "gulp",
     "lint": "gulp lint",
@@ -74,7 +74,7 @@
     "webpack-stream": "^3.1.0"
   },
   "babelBoilerplateOptions": {
-    "entryFileName": "reduction-sauce",
+    "entryFileName": "index",
     "mainVarName": "reductionSauce"
   }
 }

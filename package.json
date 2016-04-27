@@ -23,6 +23,9 @@
     "url": "https://github.com/ericwooley/reduction-sauce/issues"
   },
   "homepage": "https://github.com/ericwooley/reduction-sauce",
+  "peerDependencies": {
+    "react-redux": "^4.x"
+  },
   "devDependencies": {
     "babel-core": "^6.3.26",
     "babel-eslint": "^4.1.6",

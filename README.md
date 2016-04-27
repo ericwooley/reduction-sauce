@@ -8,16 +8,10 @@ Simple key value reducers without boilerplate
 [![Dependency Status](https://david-dm.org/ericwooley/reduction-sauce.svg)](https://david-dm.org/ericwooley/reduction-sauce)
 [![devDependency Status](https://david-dm.org/ericwooley/reduction-sauce/dev-status.svg)](https://david-dm.org/ericwooley/reduction-sauce#info=devDependencies)
 
-
-
-# Roadmap
-1. ~~Reduction Reducer - Reducer that responds to actions with key to update simple key value pairs~~
-2. ~~Reduction Sauce - High order component that hooks everything up for you.~~
-3. Auto reset view when you exit
-
-
 # Tutorial
-Setup as usual with react-redux, and include reductionReducer as one of your reducers.
+1. install `npm i -S reduction-sauce`
+2. Setup as usual with react-redux, and include reductionReducer as one of your reducers.
+
 ```js
 // app.jsx
 import {reductionReducer} from 'reduction-sauce'
@@ -81,5 +75,25 @@ export default reductionSauce(
   {...actionsFromElsewhere} // map actions to dispatch actions just like redux connect
   // any other props get passed directly to connect
 )(SimpleEl)
+
+```
+## Roadmap
+1. ~~Reduction Reducer - Reducer that responds to actions with key to update simple key value pairs~~
+2. ~~Reduction Sauce - High order component that hooks everything up for you.~~
+3. Auto reset view when you exit
+
+## Typescript
+Here is the typings if you use Typescript
+```ts
+declare module 'reduction-sauce' {
+    import {MapStateToProps, MapDispatchToPropsFunction, MapDispatchToPropsObject, MergeProps, Options, ClassDecorator} from 'react-redux'
+    export function reductionReducer(): any;
+    export function reductionSauce(
+                        reductionOptions: {key: string},
+                        mapStateToProps?: MapStateToProps,
+                        mapDispatchToProps?: MapDispatchToPropsFunction|MapDispatchToPropsObject|Object,
+                        mergeProps?: MergeProps,
+                        options?: Options): ClassDecorator
+}
 
 ```

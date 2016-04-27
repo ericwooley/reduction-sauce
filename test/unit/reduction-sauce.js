@@ -19,7 +19,7 @@ function createRenderer (store, render) {
       try {
         document.getElementById('react-render').innerHTML = element.innerHTML
       } catch (e) {
-        console.warn('Could not do physical update')
+        // console.warn('Could not do physical update')
       }
     }
     return element

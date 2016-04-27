@@ -18,7 +18,12 @@ const config = manifest.babelBoilerplateOptions
 const mainFile = manifest.main
 const destinationFolder = path.dirname(mainFile)
 const exportFileName = path.basename(mainFile, path.extname(mainFile))
-
+const loaders = [
+  // This is what allows us to author in future JavaScript
+  { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
+  // This allows the test setup scripts to load `package.json`
+  { test: /\.json$/, exclude: /node_modules/, loader: 'json-loader' }
+]
 function cleanDist (done) {
   del([destinationFolder]).then(() => done())
 }
@@ -72,10 +77,7 @@ function build () {
         library: config.mainVarName
       },
       module: {
-        loaders: [
-          { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
-          { test: /\.json$/, exclude: /node_modules/, loader: 'json-loader' }
-        ]
+        loaders: loaders
       },
       devtool: 'source-map'
     }))
@@ -146,12 +148,7 @@ function testBrowser () {
         filename: '__spec-build.js'
       },
       module: {
-        loaders: [
-          // This is what allows us to author in future JavaScript
-          { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
-          // This allows the test setup scripts to load `package.json`
-          { test: /\.json$/, exclude: /node_modules/, loader: 'json-loader' }
-        ]
+        loaders: loaders
       },
       plugins: [
         // By default, webpack does `n=>n` compilation with entry files. This concatenates

@@ -1,3 +1,10 @@
+
+[![Travis build status](http://img.shields.io/travis/ericwooley/reduction-sauce.svg?style=flat)](https://travis-ci.org/ericwooley/reduction-sauce)
+[![Code Climate](https://codeclimate.com/github/ericwooley/reduction-sauce/badges/gpa.svg)](https://codeclimate.com/github/ericwooley/reduction-sauce)
+[![Test Coverage](https://codeclimate.com/github/ericwooley/reduction-sauce/badges/coverage.svg)](https://codeclimate.com/github/ericwooley/reduction-sauce)
+[![Dependency Status](https://david-dm.org/ericwooley/reduction-sauce.svg)](https://david-dm.org/ericwooley/reduction-sauce)
+[![devDependency Status](https://david-dm.org/ericwooley/reduction-sauce/dev-status.svg)](https://david-dm.org/ericwooley/reduction-sauce#info=devDependencies)
+
 <h1>
   Reduction Sauce <img align="right" src="Reduction Sauce Logo.png"> 
 </h1>
@@ -6,12 +13,6 @@
 Checkout the latest documentation here: https://ericwooley.gitbooks.io/reductionsauce/content/
 
 Simple key value reducers without boilerplate
-
-[![Travis build status](http://img.shields.io/travis/ericwooley/reduction-sauce.svg?style=flat)](https://travis-ci.org/ericwooley/reduction-sauce)
-[![Code Climate](https://codeclimate.com/github/ericwooley/reduction-sauce/badges/gpa.svg)](https://codeclimate.com/github/ericwooley/reduction-sauce)
-[![Test Coverage](https://codeclimate.com/github/ericwooley/reduction-sauce/badges/coverage.svg)](https://codeclimate.com/github/ericwooley/reduction-sauce)
-[![Dependency Status](https://david-dm.org/ericwooley/reduction-sauce.svg)](https://david-dm.org/ericwooley/reduction-sauce)
-[![devDependency Status](https://david-dm.org/ericwooley/reduction-sauce/dev-status.svg)](https://david-dm.org/ericwooley/reduction-sauce#info=devDependencies)
 
 # Installation
 

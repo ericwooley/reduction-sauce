@@ -1,5 +1,5 @@
 ![](Reduction Sauce Logo.png)
-# reduction-sauce
+# Reduction Sauce
 
 ### Documentation
 Checkout the latest documentation here: https://ericwooley.gitbooks.io/reductionsauce/content/

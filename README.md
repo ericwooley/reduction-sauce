@@ -1,5 +1,8 @@
 # reduction-sauce
 
+### Documentation
+Checkout the latest documentation here: https://ericwooley.gitbooks.io/reductionsauce/content/
+
 Simple key value reducers without boilerplate
 
 [![Travis build status](http://img.shields.io/travis/ericwooley/reduction-sauce.svg?style=flat)](https://travis-ci.org/ericwooley/reduction-sauce)
@@ -8,9 +11,11 @@ Simple key value reducers without boilerplate
 [![Dependency Status](https://david-dm.org/ericwooley/reduction-sauce.svg)](https://david-dm.org/ericwooley/reduction-sauce)
 [![devDependency Status](https://david-dm.org/ericwooley/reduction-sauce/dev-status.svg)](https://david-dm.org/ericwooley/reduction-sauce#info=devDependencies)
 
-# Tutorial
-1. install `npm i -S reduction-sauce`
-2. Setup as usual with react-redux, and include reductionReducer as one of your reducers.
+# Installation
+
+1. Install `npm i -S reduction-sauce`
+
+#### Setup as usual with react-redux, and include `reductionReducer` as one of your reducers.
 
 ```js
 // app.jsx
@@ -29,6 +34,31 @@ ReactDOM.render(
     document.getElementById('react-render')
 )
 ```
+#### Create a component 
+```js
+// smart-components/simple-el.jsx
+import React, { PropTypes } from 'react'
+
+class SimpleEl extends React.Component {
+  render () {
+    // These are passed down as props from the store.
+    const {title, subtitle} = this.props
+    return (
+      <div>
+        <h1>Title: {title}</h1>
+        <p>{subtitle}</p>
+      </div>
+    )
+  }
+}
+
+SimpleEl.propTypes = {
+  title: PropTypes.string,
+  subtitle: PropTypes.string
+}
+```
+
+#### Then hook it up to reduction sauce
 
 ```js
 // smart-components/simple-el.jsx
@@ -36,20 +66,6 @@ import {reductionSauce} from 'reduction-sauce'
 import React, { PropTypes } from 'react'
 
 class SimpleEl extends React.Component {
-  componentWillMount() {
-    // use set props just like setState. This uses a shallow merge, and passes
-    // all keys down as props. See render()
-    this.props.setSauce({
-      title: 'Simple Title',
-      subtitle: 'something simple'
-    })
-    // You can also replace a single key if you want.
-    this.props.setSauceKey('subtitle', 'something less simple')
-  }
-  componentWillMount () {
-    // Clear the state of this view on exit.
-    this.props.resetSauce()
-  }
   render () {
     // These are passed down as props from the store.
     const {title, subtitle} = this.props
@@ -69,31 +85,60 @@ SimpleEl.propTypes = {
 
 // Use reductionSauce Like connect, from react-redux, but with 1 addition option argument at the beginning.
 export default reductionSauce(
-  {key: 'SimpleElReducerKey'}, // Options for reductionSauce, only key is supported for now.
+  { // Options for reductionSauce, only key is supported for now.
+    key: 'SimpleElReducerKey' // required
+  },
   // The following arguments are passed to connect from 'react-redux'
   (state) => ({stupid: state.otherReducer.stupid}), // Map state to props, just like with redux connect
   {...actionsFromElsewhere} // map actions to dispatch actions just like redux connect
   // any other props get passed directly to connect
 )(SimpleEl)
-
 ```
-## Roadmap
-1. ~~Reduction Reducer - Reducer that responds to actions with key to update simple key value pairs~~
-2. ~~Reduction Sauce - High order component that hooks everything up for you.~~
-3. Auto reset view when you exit
+#### Now you can manipulate your state using the provided property methods.
 
-## Typescript
-Here is the typings if you use Typescript
-```ts
-declare module 'reduction-sauce' {
-    import {MapStateToProps, MapDispatchToPropsFunction, MapDispatchToPropsObject, MergeProps, Options, ClassDecorator} from 'react-redux'
-    export function reductionReducer(): any;
-    export function reductionSauce(
-                        reductionOptions: {key: string},
-                        mapStateToProps?: MapStateToProps,
-                        mapDispatchToProps?: MapDispatchToPropsFunction|MapDispatchToPropsObject|Object,
-                        mergeProps?: MergeProps,
-                        options?: Options): ClassDecorator
+```js
+// smart-components/simple-el.jsx
+import {reductionSauce} from 'reduction-sauce'
+import React, { PropTypes } from 'react'
+
+class SimpleEl extends React.Component {
+  componentWillMount() {
+    // use set props just like setState. This uses a shallow merge, and passes
+    // all keys down as props. See render()
+    this.props.setSauce({
+      title: 'Component Will Mount',
+      subtitle: 'The last lifecycle method was componentWillMount'
+    })
+    
+  }
+  componentDidUpdate () {
+    // You can also replace a single key if you want.
+    this.props.setSauceKey('title', 'Looks like the component updated')
+    this.props.setSauceKey('subtitle', 'The last lifecycle method was componentDidUpdate')
+  }
+  componentWillUnMount () {
+    // Clear the state of this view on exit.
+    this.props.resetSauce()
+  }
+  render () {
+    // These are passed down as props from the store.
+    const {title, subtitle} = this.props
+    return (
+      <div>
+        <h1>Title: {title}</h1>
+        <p>{subtitle}</p>
+      </div>
+    )
+  }
 }
 
+SimpleEl.propTypes = {
+  title: PropTypes.string,
+  subtitle: PropTypes.string
+}
+export default reductionSauce(
+  {key: 'SimpleElReducerKey'}, // Options for reductionSauce, only key is supported for now.
+  (state) => ({stupid: state.otherReducer.stupid}), // Map state to props, just like with redux connect
+  {...actionsFromElsewhere} // map actions to dispatch actions just like redux connect
+)(SimpleEl)
 ```

@@ -9,8 +9,11 @@
   Reduction Sauce <img align="right" src="Reduction Sauce Logo.png"> 
 </h1>
 
+### Motivation
+See [Motivation](https://ericwooley.gitbooks.io/reductionsauce/content/index.html) on gitbook
+
 ### Documentation
-Checkout the latest documentation here: https://ericwooley.gitbooks.io/reductionsauce/content/
+Checkout the latest documentation [on gitbook](https://ericwooley.gitbooks.io/reductionsauce/content/)
 
 Simple key value reducers without boilerplate
 

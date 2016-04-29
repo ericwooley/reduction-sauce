@@ -8,14 +8,12 @@
 <h1>
   Reduction Sauce <img align="right" src="Reduction Sauce Logo.png"> 
 </h1>
-
+Simple key value reducers without boilerplate
 ### Motivation
 See [Motivation](https://ericwooley.gitbooks.io/reductionsauce/content/index.html) on gitbook
 
 ### Documentation
 Checkout the latest documentation [on gitbook](https://ericwooley.gitbooks.io/reductionsauce/content/)
-
-Simple key value reducers without boilerplate
 
 # Installation
 

@@ -1,3 +1,4 @@
+![](Reduction Sauce Logo.png)
 # reduction-sauce
 
 ### Documentation

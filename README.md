@@ -1,5 +1,6 @@
-![](Reduction Sauce Logo.png)
-# Reduction Sauce
+<h1>
+  Reduction Sauce <img align="right" src="Reduction Sauce Logo.png"> 
+</h1>
 
 ### Documentation
 Checkout the latest documentation here: https://ericwooley.gitbooks.io/reductionsauce/content/

@@ -245,4 +245,40 @@ describe('reduction-sauce', () => {
       render(ReductionSauce)
     })
   })
+  describe('dynamic key usage', () => {
+    let render, store
+    beforeEach(() => {
+      const initialState = {stupid: 'value'}
+      store = createStore(combineReducers({
+        otherReducer: (state = initialState, action) => {
+          switch (action.type) {
+            case 'TEST_ACTION':
+              return {stupid: 'test'}
+          }
+          return state
+        },
+        reductionReducer
+      }))
+      render = createRenderer(store, true)
+    })
+    it('work with dynamic keys', (done) => {
+      class SetSauceClass extends React.Component {
+        componentWillMount () {
+          this.props.setSauce({
+            test: 'test'
+          })
+        }
+        componentWillReceiveProps (newProps) {
+          expect(newProps.test).toEqual('test')
+          expect(store.getState().reductionReducer.dynamicKey.test).toEqual('test')
+          done()
+        }
+        render () { return null }
+      }
+      const ReductionSauce = reductionSauce(
+        {key: 'test'},
+        (state) => ({stupid: state.otherReducer.stupid}))(SetSauceClass)
+      render(ReductionSauce, {sauceKey: 'dynamicKey'})
+    })
+  })
 })

@@ -7,14 +7,14 @@ function reductionSauce ({
   return (Comp) => {
     // return Comp
     return connect(
-      (state) => {
+      (state, props) => {
         const innerMapping = typeof mapStateToProps === 'function' ? mapStateToProps(state) : {}
         return {
           ...innerMapping,
-          ...(state.reductionReducer[key] || {})
+          ...(state.reductionReducer[(props.sauceKey || key)] || {})
         }
       },
-      (dispatch) => {
+      (dispatch, props) => {
         const dispatchProps = typeof mapDispatchProps === 'function'
         ? mapDispatchProps(dispatch)
         : Object.keys(mapDispatchProps).reduce((dispatchObject, key) => {
@@ -24,9 +24,9 @@ function reductionSauce ({
 
         return {
           ...dispatchProps,
-          setSauceKey: (...setSauceArgs) => dispatch(actions.setSauceKey(key, ...setSauceArgs)),
-          setSauce: (...setSauceArgs) => dispatch(actions.setSauce(key, ...setSauceArgs)),
-          resetSauce: (...setSauceArgs) => dispatch(actions.resetSauce(key, ...setSauceArgs))
+          setSauceKey: (...setSauceArgs) => dispatch(actions.setSauceKey(props.sauceKey || key, ...setSauceArgs)),
+          setSauce: (...setSauceArgs) => dispatch(actions.setSauce(props.sauceKey || key, ...setSauceArgs)),
+          resetSauce: (...setSauceArgs) => dispatch(actions.resetSauce(props.sauceKey || key, ...setSauceArgs))
         }
       }, ...args)(Comp)
   }

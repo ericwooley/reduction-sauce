@@ -213,19 +213,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var mapDispatchProps = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
 	
 	  return function (Comp) {
-	    // return Comp
-	    return _reactRedux.connect.apply(undefined, [function (state, props) {
-	      var innerMapping = typeof mapStateToProps === 'function' ? mapStateToProps(state) : {};
-	      return _extends({}, innerMapping, state.reductionReducer[props.sauceKey || key] || {});
+	    var Sauced = (0, _reactRedux.connect)(function (state, props) {
+	      return _extends({}, state.reductionReducer[props.sauceKey || key] || {});
 	    }, function (dispatch, props) {
-	      var dispatchProps = typeof mapDispatchProps === 'function' ? mapDispatchProps(dispatch) : Object.keys(mapDispatchProps).reduce(function (dispatchObject, key) {
-	        dispatchObject[key] = function () {
-	          return dispatch(mapDispatchProps[key].apply(mapDispatchProps, arguments));
-	        };
-	        return dispatchObject;
-	      }, {});
-	
-	      return _extends({}, dispatchProps, {
+	      return {
 	        setSauceKey: function setSauceKey() {
 	          for (var _len2 = arguments.length, setSauceArgs = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
 	            setSauceArgs[_key2] = arguments[_key2];
@@ -247,8 +238,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	          return dispatch(_reductionReducer.actions.resetSauce.apply(_reductionReducer.actions, [props.sauceKey || key].concat(setSauceArgs)));
 	        }
-	      });
-	    }].concat(args))(Comp);
+	      };
+	    })(Comp);
+	    return _reactRedux.connect.apply(undefined, [mapStateToProps, mapDispatchProps].concat(args))(Sauced);
 	  };
 	}
 	

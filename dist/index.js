@@ -214,10 +214,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  return function (Comp) {
 	    // return Comp
-	    return _reactRedux.connect.apply(undefined, [function (state) {
+	    return _reactRedux.connect.apply(undefined, [function (state, props) {
 	      var innerMapping = typeof mapStateToProps === 'function' ? mapStateToProps(state) : {};
-	      return _extends({}, innerMapping, state.reductionReducer[key] || {});
-	    }, function (dispatch) {
+	      return _extends({}, innerMapping, state.reductionReducer[props.sauceKey || key] || {});
+	    }, function (dispatch, props) {
 	      var dispatchProps = typeof mapDispatchProps === 'function' ? mapDispatchProps(dispatch) : Object.keys(mapDispatchProps).reduce(function (dispatchObject, key) {
 	        dispatchObject[key] = function () {
 	          return dispatch(mapDispatchProps[key].apply(mapDispatchProps, arguments));
@@ -231,21 +231,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	            setSauceArgs[_key2] = arguments[_key2];
 	          }
 	
-	          return dispatch(_reductionReducer.actions.setSauceKey.apply(_reductionReducer.actions, [key].concat(setSauceArgs)));
+	          return dispatch(_reductionReducer.actions.setSauceKey.apply(_reductionReducer.actions, [props.sauceKey || key].concat(setSauceArgs)));
 	        },
 	        setSauce: function setSauce() {
 	          for (var _len3 = arguments.length, setSauceArgs = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
 	            setSauceArgs[_key3] = arguments[_key3];
 	          }
 	
-	          return dispatch(_reductionReducer.actions.setSauce.apply(_reductionReducer.actions, [key].concat(setSauceArgs)));
+	          return dispatch(_reductionReducer.actions.setSauce.apply(_reductionReducer.actions, [props.sauceKey || key].concat(setSauceArgs)));
 	        },
 	        resetSauce: function resetSauce() {
 	          for (var _len4 = arguments.length, setSauceArgs = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
 	            setSauceArgs[_key4] = arguments[_key4];
 	          }
 	
-	          return dispatch(_reductionReducer.actions.resetSauce.apply(_reductionReducer.actions, [key].concat(setSauceArgs)));
+	          return dispatch(_reductionReducer.actions.resetSauce.apply(_reductionReducer.actions, [props.sauceKey || key].concat(setSauceArgs)));
 	        }
 	      });
 	    }].concat(args))(Comp);

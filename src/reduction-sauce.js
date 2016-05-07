@@ -1,3 +1,4 @@
+import {compose} from 'redux'
 import {connect} from 'react-redux'
 import {actions} from './reduction-reducer'
 function reductionSauce ({
@@ -5,30 +6,18 @@ function reductionSauce ({
   resetOnExit = true
 }, mapStateToProps, mapDispatchProps = {}, ...args) {
   return (Comp) => {
-    // return Comp
-    return connect(
-      (state, props) => {
-        const innerMapping = typeof mapStateToProps === 'function' ? mapStateToProps(state) : {}
-        return {
-          ...innerMapping,
+    return compose(
+      connect(mapStateToProps, mapDispatchProps, ...args),
+      connect(
+        (state, props) => ({
           ...(state.reductionReducer[(props.sauceKey || key)] || {})
-        }
-      },
-      (dispatch, props) => {
-        const dispatchProps = typeof mapDispatchProps === 'function'
-        ? mapDispatchProps(dispatch)
-        : Object.keys(mapDispatchProps).reduce((dispatchObject, key) => {
-          dispatchObject[key] = (...dispatchArgs) => dispatch(mapDispatchProps[key](...dispatchArgs))
-          return dispatchObject
-        }, {})
-
-        return {
-          ...dispatchProps,
+        }),
+        (dispatch, props) => ({
           setSauceKey: (...setSauceArgs) => dispatch(actions.setSauceKey(props.sauceKey || key, ...setSauceArgs)),
           setSauce: (...setSauceArgs) => dispatch(actions.setSauce(props.sauceKey || key, ...setSauceArgs)),
           resetSauce: (...setSauceArgs) => dispatch(actions.resetSauce(props.sauceKey || key, ...setSauceArgs))
-        }
-      }, ...args)(Comp)
+        }))
+    )(Comp)
   }
 }
 

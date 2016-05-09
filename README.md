@@ -146,3 +146,20 @@ export default reductionSauce(
   {...actionsFromElsewhere} // map actions to dispatch actions just like redux connect
 )(SimpleEl)
 ```
+#### Reusable components
+If you wanted to use SimpleEl multiple times, with a different key for each, add a unique props: sauceKey.
+This works similarly the reacts key propery.
+
+```js
+import SimpleEl from './SimpleEl'
+const simpleTextArr = [
+ {title: 'title 0', subtitle: 'subtitle 0'},
+ {title: 'title 1', subtitle: 'subtitle 1'}, 
+ {title: 'title 2', subtitle: 'subtitle 2'}
+]
+export default () => <ul>
+  {simpleTextArr.map((simpleText, index) => <SimpleEl sauceKey={index} {...simpleText} />
+</ul>
+
+```
+

@@ -158,7 +158,7 @@ const simpleTextArr = [
  {title: 'title 2', subtitle: 'subtitle 2'}
 ]
 export default () => <ul>
-  {simpleTextArr.map((simpleText, index) => <SimpleEl sauceKey={index} {...simpleText} />
+  {simpleTextArr.map((simpleText, index) => <li key={index}><SimpleEl sauceKey={index} {...simpleText} /></li>
 </ul>
 
 ```

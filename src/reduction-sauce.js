@@ -6,14 +6,16 @@ function reductionSauce ({
 }, mapStateToProps, mapDispatchProps = {}, ...args) {
   return (Comp) => {
     const Sauced = connect(
-      (state, props) => ({
-        ...(state.reductionReducer[(props.sauceKey || key)] || {})
-      }),
-      (dispatch, props) => ({
-        setSauceKey: (...setSauceArgs) => dispatch(actions.setSauceKey(props.sauceKey || key, ...setSauceArgs)),
-        setSauce: (...setSauceArgs) => dispatch(actions.setSauce(props.sauceKey || key, ...setSauceArgs)),
-        resetSauce: (...setSauceArgs) => dispatch(actions.resetSauce(props.sauceKey || key, ...setSauceArgs))
-      }))(Comp)
+      (state, props) => {
+        return {...(state.reductionReducer[(key + props.sauceKey)] || {})}
+      },
+      (dispatch, props) => {
+        return {
+          setSauceKey: (...setSauceArgs) => dispatch(actions.setSauceKey(key + props.sauceKey, ...setSauceArgs)),
+          setSauce: (...setSauceArgs) => dispatch(actions.setSauce(key + props.sauceKey, ...setSauceArgs)),
+          resetSauce: (...setSauceArgs) => dispatch(actions.resetSauce(key + props.sauceKey, ...setSauceArgs))
+        }
+      })(Comp)
     return connect(mapStateToProps, mapDispatchProps, ...args)(Sauced)
   }
 }

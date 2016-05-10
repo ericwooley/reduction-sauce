@@ -270,7 +270,7 @@ describe('reduction-sauce', () => {
         }
         componentWillReceiveProps (newProps) {
           expect(newProps.test).toEqual('test')
-          expect(store.getState().reductionReducer.dynamicKey.test).toEqual('test')
+          expect(store.getState().reductionReducer.testdynamicKey.test).toEqual('test')
           done()
         }
         render () { return null }

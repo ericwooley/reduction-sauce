@@ -1,5 +1,11 @@
 import {connect} from 'react-redux'
 import {actions} from './reduction-reducer'
+function getDefault (value, def = '') {
+  if (value === undefined) {
+    return def
+  }
+  return value
+}
 function reductionSauce ({
   key = '',
   resetOnExit = true
@@ -7,10 +13,10 @@ function reductionSauce ({
   return (Comp) => {
     const Sauced = connect(
       (state, props) => {
-        return {...(state.reductionReducer[(key + (props.sauceKey || ''))] || {})}
+        return {...(state.reductionReducer[(key + getDefault(props.sauceKey))] || {})}
       },
       (dispatch, props) => {
-        const sauceKey = props.sauceKey || ''
+        const sauceKey = getDefault(props.sauceKey)
         return {
           setSauceKey: (...setSauceArgs) => dispatch(actions.setSauceKey(key + sauceKey, ...setSauceArgs)),
           setSauce: (...setSauceArgs) => dispatch(actions.setSauce(key + sauceKey, ...setSauceArgs)),
